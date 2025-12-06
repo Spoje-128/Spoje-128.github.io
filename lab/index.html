@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lab - 物理シミュレーション実験室">
+    <title>Lab | Spoje-128</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Header / Navigation -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="../index.html" class="site-title">Spoje-128</a>
+            <nav class="global-nav">
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">Home</a></li>
+                    <li><a href="../articles/index.html" class="nav-link">Articles</a></li>
+                    <li><a href="index.html" class="nav-link active">Lab</a></li>
+                    <li><a href="../portfolio.html" class="nav-link">Portfolio</a></li>
+                    <li><a href="https://github.com/Spoje-128" class="nav-link external" target="_blank" rel="noopener">GitHub</a></li>
+                </ul>
+                <button class="nav-toggle" aria-label="メニューを開く">
+                    <span class="hamburger"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Breadcrumb -->
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="breadcrumb-separator">&gt;</span>
+                <span>Lab</span>
+            </nav>
+        </div>
+
+        <!-- Page Header -->
+        <section class="section">
+            <div class="container">
+                <h1 class="section-title">🔬 Lab</h1>
+                <p>
+                    物理シミュレーション実験室へようこそ。<br>
+                    Canvas API / WebGL を用いた動的なシミュレーションを展示しています。
+                    各デモはパラメータをリアルタイムに調整できます。
+                </p>
+            </div>
+        </section>
+
+        <!-- Simulations Grid -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title">Simulations</h2>
+                <div class="card-grid">
+                    <!-- Inverted Pendulum -->
+                    <a href="inverted-pendulum/index.html" class="card lab-card">
+                        <div class="lab-card-icon">⚖️</div>
+                        <h3 class="card-title">倒立振子シミュレーション</h3>
+                        <p class="card-description">
+                            台車上の倒立振子をPID制御・LQR制御で安定化するデモ。
+                            制御ゲインをリアルタイムに調整可能。
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">Control Theory</span>
+                            <span class="tag">Canvas</span>
+                        </div>
+                    </a>
+
+                    <!-- Wave Equation -->
+                    <a href="wave-equation/index.html" class="card lab-card">
+                        <div class="lab-card-icon">🌊</div>
+                        <h3 class="card-title">波動方程式の可視化</h3>
+                        <p class="card-description">
+                            1次元・2次元の波動方程式を数値的に解き、
+                            波の伝播をリアルタイムで可視化。
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">PDE</span>
+                            <span class="tag">Numerical Methods</span>
+                        </div>
+                    </a>
+
+                    <!-- Double Pendulum -->
+                    <div class="card lab-card coming-soon-card">
+                        <div class="lab-card-icon">🎯</div>
+                        <h3 class="card-title">二重振子（カオス）</h3>
+                        <p class="card-description">
+                            二重振子のカオス的振る舞いをシミュレーション。
+                            初期条件感度を視覚的に確認。
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">Chaos</span>
+                            <span class="tag">Coming Soon</span>
+                        </div>
+                    </div>
+
+                    <!-- Orbital Mechanics -->
+                    <div class="card lab-card coming-soon-card">
+                        <div class="lab-card-icon">🚀</div>
+                        <h3 class="card-title">軌道力学シミュレーション</h3>
+                        <p class="card-description">
+                            ケプラー軌道、ホーマン遷移軌道の計算と可視化。
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">Aerospace</span>
+                            <span class="tag">Coming Soon</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Technology</h2>
+                <p>
+                    すべてのシミュレーションは以下の技術で実装されています：
+                </p>
+                <ul>
+                    <li><strong>HTML5 Canvas API:</strong> 2Dグラフィックス描画</li>
+                    <li><strong>Vanilla JavaScript:</strong> フレームワーク不使用の純粋なJS</li>
+                    <li><strong>数値計算:</strong> ルンゲ・クッタ法などの数値積分手法</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p class="copyright">&copy; 2025 Spoje-128. All rights reserved.</p>
+            <p class="footer-note">Built with HTML5, CSS3, and Vanilla JavaScript.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/common.js"></script>
+</body>
+</html>

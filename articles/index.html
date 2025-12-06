@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="技術記事・学習記録の一覧 - Electronics, Physics, Programming, Math, Music">
+    <title>Articles | Spoje-128</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/syntax.css">
+    
+    <!-- MathJax -->
+    <script src="../js/math_config.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <!-- Header / Navigation -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="../index.html" class="site-title">Spoje-128</a>
+            <nav class="global-nav">
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html" class="nav-link active">Articles</a></li>
+                    <li><a href="../lab/index.html" class="nav-link">Lab</a></li>
+                    <li><a href="../portfolio.html" class="nav-link">Portfolio</a></li>
+                    <li><a href="https://github.com/Spoje-128" class="nav-link external" target="_blank" rel="noopener">GitHub</a></li>
+                </ul>
+                <button class="nav-toggle" aria-label="メニューを開く">
+                    <span class="hamburger"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Breadcrumb -->
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="breadcrumb-separator">&gt;</span>
+                <span>Articles</span>
+            </nav>
+        </div>
+
+        <!-- Page Header -->
+        <section class="section">
+            <div class="container">
+                <h1 class="section-title">Articles</h1>
+                <p>技術記事・学習記録の一覧です。タグでフィルタリングできます。</p>
+                
+                <!-- Tag Filter -->
+                <div class="tag-filter">
+                    <button class="tag-btn active" data-tag="all">All</button>
+                    <button class="tag-btn" data-tag="electronics">Electronics</button>
+                    <button class="tag-btn" data-tag="physics">Physics</button>
+                    <button class="tag-btn" data-tag="programming">Programming</button>
+                    <button class="tag-btn" data-tag="math">Math</button>
+                    <button class="tag-btn" data-tag="music">Music</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Article List -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="articles-container">
+                    <!-- Sample Article 1 -->
+                    <article class="article-card" data-tags="electronics">
+                        <div class="article-card-content">
+                            <div class="article-card-tags">
+                                <span class="tag">Electronics</span>
+                            </div>
+                            <h2 class="article-card-title">
+                                <a href="sample-opamp.html">サンプル記事：オペアンプの基礎</a>
+                            </h2>
+                            <p class="article-card-excerpt">
+                                オペアンプの基本概念と反転増幅回路について解説します。
+                            </p>
+                            <time class="article-card-date" datetime="2025-12-06">2025.12.06</time>
+                        </div>
+                    </article>
+
+                    <!-- Sample Article 2 -->
+                    <article class="article-card" data-tags="physics">
+                        <div class="article-card-content">
+                            <div class="article-card-tags">
+                                <span class="tag">Physics</span>
+                            </div>
+                            <h2 class="article-card-title">
+                                <a href="sample-lagrangian.html">サンプル記事：ラグランジュ力学入門</a>
+                            </h2>
+                            <p class="article-card-excerpt">
+                                解析力学の基礎であるラグランジュ形式について解説します。
+                            </p>
+                            <time class="article-card-date" datetime="2025-12-06">2025.12.06</time>
+                        </div>
+                    </article>
+
+                    <!-- Sample Article 3 -->
+                    <article class="article-card" data-tags="programming">
+                        <div class="article-card-content">
+                            <div class="article-card-tags">
+                                <span class="tag">Programming</span>
+                            </div>
+                            <h2 class="article-card-title">
+                                <a href="sample-rust.html">サンプル記事：Rustで数値計算</a>
+                            </h2>
+                            <p class="article-card-excerpt">
+                                ルンゲ・クッタ法をRustで実装します。
+                            </p>
+                            <time class="article-card-date" datetime="2025-12-06">2025.12.06</time>
+                        </div>
+                    </article>
+
+                    <!-- No articles message -->
+                    <div class="no-articles" style="display: none;">
+                        <p>該当する記事がありません。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p class="copyright">&copy; 2025 Spoje-128. All rights reserved.</p>
+            <p class="footer-note">Built with HTML5, CSS3, and Vanilla JavaScript.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/common.js"></script>
+    <script>
+    // Tag filtering functionality
+    (function() {
+        const tagBtns = document.querySelectorAll('.tag-btn');
+        const articleCards = document.querySelectorAll('.article-card');
+        const noArticles = document.querySelector('.no-articles');
+        
+        tagBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Update active button
+                tagBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const tag = this.dataset.tag;
+                let visibleCount = 0;
+                
+                articleCards.forEach(card => {
+                    if (tag === 'all' || card.dataset.tags.includes(tag)) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Show/hide "no articles" message
+                if (noArticles) {
+                    noArticles.style.display = visibleCount === 0 ? 'block' : 'none';
+                }
+            });
+        });
+    })();
+    </script>
+</body>
+</html>

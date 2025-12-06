@@ -1,0 +1,251 @@
+/* ============================================
+   Syntax Highlighting Theme
+   IntelliJ Light / JetBrains IDE Style
+   ============================================ */
+
+/* Override Highlight.js default styles */
+.hljs {
+    background: #f8f9fa;
+    color: #333333;
+    padding: 1rem;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+/* Comments - Gray/Green */
+.hljs-comment,
+.hljs-quote {
+    color: #8c8c8c;
+    font-style: italic;
+}
+
+/* Documentation comments */
+.hljs-doctag {
+    color: #629755;
+}
+
+/* Keywords - Blue */
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-section {
+    color: #0033b3;
+    font-weight: 500;
+}
+
+/* Built-in types and classes */
+.hljs-type,
+.hljs-built_in,
+.hljs-class .hljs-title {
+    color: #000080;
+}
+
+/* Strings - Green */
+.hljs-string,
+.hljs-attribute,
+.hljs-addition {
+    color: #067d17;
+}
+
+/* Numbers - Blue */
+.hljs-number,
+.hljs-literal {
+    color: #1750eb;
+}
+
+/* Function names - Gold/Brown */
+.hljs-title,
+.hljs-title.function_,
+.hljs-title.class_ {
+    color: #00627a;
+}
+
+/* Variables and parameters */
+.hljs-variable,
+.hljs-params,
+.hljs-template-variable {
+    color: #660e7a;
+}
+
+/* Constants */
+.hljs-constant {
+    color: #871094;
+}
+
+/* Operators */
+.hljs-operator {
+    color: #333333;
+}
+
+/* Punctuation */
+.hljs-punctuation {
+    color: #333333;
+}
+
+/* Tags (HTML/XML) */
+.hljs-tag {
+    color: #0033b3;
+}
+
+.hljs-name {
+    color: #000080;
+}
+
+/* Attributes */
+.hljs-attr {
+    color: #174ad4;
+}
+
+/* Regex */
+.hljs-regexp {
+    color: #264f78;
+}
+
+/* Symbols */
+.hljs-symbol {
+    color: #0033b3;
+}
+
+/* Meta */
+.hljs-meta {
+    color: #9e880d;
+}
+
+/* Deletion */
+.hljs-deletion {
+    color: #a31515;
+    background-color: #ffeef0;
+}
+
+/* Addition */
+.hljs-addition {
+    color: #067d17;
+    background-color: #e6ffed;
+}
+
+/* Selection */
+.hljs-selection,
+.hljs ::selection {
+    background-color: #a6d2ff;
+}
+
+/* Emphasis and Strong */
+.hljs-emphasis {
+    font-style: italic;
+}
+
+.hljs-strong {
+    font-weight: bold;
+}
+
+/* Language-specific adjustments */
+
+/* Python */
+.hljs-keyword.python {
+    color: #0033b3;
+}
+
+/* Rust */
+.language-rust .hljs-keyword {
+    color: #0033b3;
+}
+
+.language-rust .hljs-type {
+    color: #000080;
+}
+
+/* Haskell */
+.language-haskell .hljs-type {
+    color: #000080;
+}
+
+.language-haskell .hljs-keyword {
+    color: #0033b3;
+}
+
+/* C++ */
+.language-cpp .hljs-keyword {
+    color: #0033b3;
+}
+
+.language-cpp .hljs-preprocessor {
+    color: #9e880d;
+}
+
+/* MATLAB */
+.language-matlab .hljs-keyword {
+    color: #0033b3;
+}
+
+.language-matlab .hljs-built_in {
+    color: #00627a;
+}
+
+/* Line numbers (if used) */
+.hljs-ln {
+    border-collapse: collapse;
+}
+
+.hljs-ln td {
+    padding: 0;
+}
+
+.hljs-ln-numbers {
+    user-select: none;
+    text-align: right;
+    color: #aaaaaa;
+    border-right: 1px solid #e2e8f0;
+    padding-right: 0.75rem;
+    margin-right: 0.75rem;
+    vertical-align: top;
+}
+
+.hljs-ln-code {
+    padding-left: 0.75rem;
+}
+
+/* Code block container styling */
+pre.code-block {
+    position: relative;
+    margin: 1.5rem 0;
+}
+
+/* Language label */
+pre.code-block::before {
+    content: attr(data-language);
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    color: #8c8c8c;
+    background-color: #f0f0f0;
+    border-bottom-left-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+/* Copy button (if implemented) */
+.code-copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    color: #666666;
+    background-color: #f0f0f0;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+pre:hover .code-copy-btn {
+    opacity: 1;
+}
+
+.code-copy-btn:hover {
+    background-color: #e2e8f0;
+}

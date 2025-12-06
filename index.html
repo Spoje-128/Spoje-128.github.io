@@ -1,90 +1,161 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Colorless green ideas sleep furiously</title>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Spoje-128�̌l�T�C�g - �d�q�H�w�����w�v���O���~���O�Ɋւ���w�K�L�^�ƃV�~�����[�V����">
+    <meta property="og:title" content="Spoje-128 | Personal Academic Portfolio & Laboratory">
+    <meta property="og:description" content="�d�q�H�w�����w�q��F���H�w�v�Z�@�Ȋw�Ɋւ���w�K�L�^�ƕ����V�~�����[�V����">
+    <meta property="og:type" content="website">
+    <title>Spoje-128 | Personal Academic Portfolio & Laboratory</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/syntax.css">
+    
+    <!-- Highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    
+    <!-- MathJax -->
+    <script src="js/math_config.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <div class="header-left">
-        <img class="logo" src="https://prog-8.com/images/html/advanced/main_logo.png">
-      </div>
-      <span class="fa fa-bars menu-icon"></span>
-      <div class="header-right">
-        <a href="#">href1</a>
-        <a href="#">href2</a>
-        <a href="#" class="login">ログイン</a>
-      </div>
-    </div>
-  </header>
-  <div class="top-wrapper">
-    <div class="container">
-      <h1>LEARN TO CODE.<br>LEARN TO BE CREATIVE.</h1>
-      <p>Progateはオンラインプログラミング学習サービスです。<br>初心者にもやさしいスライドとレッスンで、ウェブサービスを作りながらプログラミングを学んでいきましょう</p>
-      <div class="btn-wrapper">
-        <a href="#" class="btn signup">sign up</a>
-        <p>or</p>
-        <a href="#" class="btn facebook"><span class="fa fa-facebook"></span>Facebookで登録</a>
-        <a href="#" class="btn twitter"><span class="fa fa-twitter"></span>Twitterで登録</a>
-      </div>
-    </div>
-  </div>
-  <div class="lesson-wrapper">
-    <div class="container">
-      <div class="heading">
-        <h2>Learn Where to Get Started!</h2>
-      </div>
-      <div class="lessons">
-        <div class="lesson">
-          <div class="lesson-icon">
-            <img src="https://prog-8.com/images/html/advanced/html.png">
-            <p>HTML & CSS</p>
-          </div>
-          <p class="text-contents">ウェブページの作成に使用される言語です。HTMLとCSSを組み合わせることで、静的なページを作り上げることができます。</p>
+    <!-- Header / Navigation -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="site-title">Spoje-128</a>
+            <nav class="global-nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="articles/index.html" class="nav-link">Articles</a></li>
+                    <li><a href="lab/index.html" class="nav-link">Lab</a></li>
+                    <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+                    <li><a href="https://github.com/Spoje-128" class="nav-link external" target="_blank" rel="noopener">GitHub</a></li>
+                </ul>
+                <button class="nav-toggle" aria-label="���j���[���J��">
+                    <span class="hamburger"></span>
+                </button>
+            </nav>
         </div>
-        <div class="lesson">
-          <div class="lesson-icon">
-            <img src="https://prog-8.com/images/html/advanced/jQuery.png">
-            <p>jQuery</p>
-          </div>
-          <p class="text-contents">素敵な動きを手軽に実装できるJavaScriptライブラリです。 アニメーション効果をつけたり、Ajax（エイジャックス）を使って外部ファイルを読み込んだりと色々なことができます。</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1 class="hero-title">Personal Academic Portfolio & Laboratory</h1>
+                <p class="hero-subtitle">�d�q�H�w�����w�q��F���H�w�v�Z�@�Ȋw�Ɋւ���w�K�L�^�Ǝ�����</p>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="section" id="about">
+            <div class="container">
+                <h2 class="section-title">About</h2>
+                <div class="about-content">
+                    <p>
+                        ���̃T�C�g�́A�d�q�H�w�����w�q��F���H�w�v�Z�@�Ȋw�ȂǁA
+                        ����ɂ킽��w��I�����Ɛ��ʕ����W�񂵁A�ΊO�I�ɔ��M���邽�߂̃v���b�g�t�H�[���ł��B
+                    </p>
+                    <p>
+                        Web�Z�p�iCanvas/WebGL���j��p���������V�~�����[�V�����␔�l�v�Z���A
+                        �u���E�U��œ��삷��u��i�v�Ƃ��ēW�����Ă��܂��B
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- News Section -->
+        <section class="section section-alt" id="news">
+            <div class="container">
+                <h2 class="section-title">News</h2>
+                <ul class="news-list">
+                    <li class="news-item">
+                        <time class="news-date" datetime="2025-12-06">2025.12.06</time>
+                        <span class="news-text">�T�C�g�����J���܂����B</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Update Log Section -->
+        <section class="section" id="updates">
+            <div class="container">
+                <h2 class="section-title">Update Log</h2>
+                <table class="update-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><time datetime="2025-12-06">2025.12.06</time></td>
+                            <td>�T�C�g��Ղ��\�z�AGitHub Pages�Ō��J�J�n</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Quick Links Section -->
+        <section class="section section-alt" id="quick-links">
+            <div class="container">
+                <h2 class="section-title">Contents</h2>
+                <div class="card-grid">
+                    <a href="articles/index.html" class="card">
+                        <h3 class="card-title"> Articles</h3>
+                        <p class="card-description">�Z�p�L���w�K�L�^</p>
+                        <ul class="card-list">
+                            <li>Electronics</li>
+                            <li>Physics</li>
+                            <li>Programming</li>
+                            <li>Math</li>
+                            <li>Music</li>
+                        </ul>
+                    </a>
+                    <a href="lab/index.html" class="card">
+                        <h3 class="card-title"> Lab</h3>
+                        <p class="card-description">�����V�~�����[�V����������</p>
+                        <ul class="card-list">
+                            <li>�|���U�q�V�~�����[�V����</li>
+                            <li>�g���������̉���</li>
+                            <li>����H�w�f��</li>
+                        </ul>
+                    </a>
+                    <a href="portfolio.html" class="card">
+                        <h3 class="card-title"> Portfolio</h3>
+                        <p class="card-description">�o���X�L�����앨</p>
+                        <ul class="card-list">
+                            <li>Skills & Technologies</li>
+                            <li>Projects</li>
+                            <li>Experience</li>
+                        </ul>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p class="copyright">&copy; 2025 Spoje-128. All rights reserved.</p>
+            <p class="footer-note">Built with HTML5, CSS3, and Vanilla JavaScript.</p>
         </div>
-        <div class="lesson">
-          <div class="lesson-icon">
-            <img src="https://prog-8.com/images/html/advanced/ruby.png">
-            <p>Ruby</p>
-          </div>
-          <p class="text-contents">オープンソースの動的なプログラミング言語で、 シンプルさと高い生産性を備えています。大きなWebアプリケーションから小さな日用ツールまで、さまざまなソフトウェアを作ることができます。</p>
-        </div>
-        <div class="lesson">
-          <div class="lesson-icon">
-            <img src="https://prog-8.com/images/html/advanced/php.png">
-            <p>PHP</p>
-          </div>
-          <p class="text-contents">HTMLだけではページの内容を変えることはできません。PHPはHTMLにプログラムを埋め込み、それを可能にします。</p>
-        </div>
-      </div>
-      <div class="clear"></div>
-    </div>
-  </div>
-  <div class="message-wrapper">
-    <div class="container">
-      <div class="heading">
-        <h2>さぁ、あなたもProgateでプログラミングを学んでみませんか?</h2>
-        <h3>Let's learn to code, learn to be creative!</h3>
-      </div>
-      <span class="btn message">さっそく開発する</span>
-    </div>
-  </div>
-  <footer>
-    <div class="container">
-      <img src="https://prog-8.com/images/html/advanced/footer_logo.png">
-      <p>Learn to Code, Learn to be Creative.</p>
-    </div>
-  </footer>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/common.js"></script>
+    <script>hljs.highlightAll();</script>
 </body>
 </html>

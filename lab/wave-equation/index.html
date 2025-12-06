@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="波動方程式の可視化 - 1D/2D波動シミュレーション">
+    <title>波動方程式の可視化 | Lab | Spoje-128</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../css/style.css">
+    
+    <!-- MathJax -->
+    <script src="../../js/math_config.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        .lab-page {
+            padding: var(--spacing-lg) 0;
+        }
+        .simulation-header {
+            margin-bottom: var(--spacing-xl);
+        }
+        .simulation-title {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--spacing-sm);
+        }
+        .simulation-description {
+            color: var(--color-text-light);
+        }
+        .coming-soon-notice {
+            background-color: var(--color-bg-alt);
+            border: 2px dashed var(--color-border);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-3xl);
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+        .coming-soon-notice h2 {
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-md);
+        }
+        .coming-soon-notice p {
+            color: var(--color-text-muted);
+        }
+        .theory-section {
+            margin-top: var(--spacing-2xl);
+            padding-top: var(--spacing-xl);
+            border-top: 1px solid var(--color-border);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header / Navigation -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="../../index.html" class="site-title">Spoje-128</a>
+            <nav class="global-nav">
+                <ul class="nav-list">
+                    <li><a href="../../index.html" class="nav-link">Home</a></li>
+                    <li><a href="../../articles/index.html" class="nav-link">Articles</a></li>
+                    <li><a href="../index.html" class="nav-link active">Lab</a></li>
+                    <li><a href="../../portfolio.html" class="nav-link">Portfolio</a></li>
+                    <li><a href="https://github.com/Spoje-128" class="nav-link external" target="_blank" rel="noopener">GitHub</a></li>
+                </ul>
+                <button class="nav-toggle" aria-label="メニューを開く">
+                    <span class="hamburger"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content lab-page">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span class="breadcrumb-separator">&gt;</span>
+                <a href="../index.html">Lab</a>
+                <span class="breadcrumb-separator">&gt;</span>
+                <span>波動方程式</span>
+            </nav>
+
+            <!-- Simulation Header -->
+            <div class="simulation-header">
+                <h1 class="simulation-title">🌊 波動方程式の可視化</h1>
+                <p class="simulation-description">
+                    1次元・2次元の波動方程式を差分法で数値的に解き、波の伝播をリアルタイムで可視化します。
+                </p>
+            </div>
+
+            <!-- Coming Soon Notice -->
+            <div class="coming-soon-notice">
+                <h2>🚧 Coming Soon</h2>
+                <p>このシミュレーションは現在開発中です。</p>
+            </div>
+
+            <!-- Theory Section -->
+            <div class="theory-section">
+                <h2>波動方程式</h2>
+                <p>
+                    1次元の波動方程式は次のように表されます：
+                </p>
+
+                $$
+                \frac{\partial^2 u}{\partial t^2} = c^2 \frac{\partial^2 u}{\partial x^2}
+                $$
+
+                <p>
+                    ここで、$u(x, t)$ は変位、$c$ は波の伝播速度です。
+                </p>
+
+                <h3>差分法による離散化</h3>
+                <p>
+                    時間と空間を離散化し、中心差分を用いると：
+                </p>
+
+                $$
+                \frac{u_i^{n+1} - 2u_i^n + u_i^{n-1}}{\Delta t^2} = c^2 \frac{u_{i+1}^n - 2u_i^n + u_{i-1}^n}{\Delta x^2}
+                $$
+
+                <p>
+                    これを整理すると、次の時刻の値を陽的に計算できます：
+                </p>
+
+                $$
+                u_i^{n+1} = 2u_i^n - u_i^{n-1} + r^2(u_{i+1}^n - 2u_i^n + u_{i-1}^n)
+                $$
+
+                <p>
+                    ここで $r = c\Delta t / \Delta x$ はCFL数（クーラン数）です。
+                    安定性条件 $r \leq 1$ を満たす必要があります。
+                </p>
+
+                <h3>2次元への拡張</h3>
+                <p>
+                    2次元波動方程式は：
+                </p>
+
+                $$
+                \frac{\partial^2 u}{\partial t^2} = c^2 \left( \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} \right)
+                $$
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p class="copyright">&copy; 2025 Spoje-128. All rights reserved.</p>
+            <p class="footer-note">Built with HTML5, CSS3, and Vanilla JavaScript.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../js/common.js"></script>
+</body>
+</html>

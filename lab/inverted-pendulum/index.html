@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="倒立振子シミュレーション - 制御工学デモ">
+    <title>倒立振子シミュレーション | Lab | Spoje-128</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../css/style.css">
+    
+    <!-- MathJax -->
+    <script src="../../js/math_config.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        .lab-page {
+            padding: var(--spacing-lg) 0;
+        }
+        .simulation-header {
+            margin-bottom: var(--spacing-xl);
+        }
+        .simulation-title {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--spacing-sm);
+        }
+        .simulation-description {
+            color: var(--color-text-light);
+        }
+        .simulation-area {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+        }
+        @media (max-width: 900px) {
+            .simulation-area {
+                grid-template-columns: 1fr;
+            }
+        }
+        .canvas-wrapper {
+            background-color: var(--color-bg-alt);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+        }
+        #pendulumCanvas {
+            display: block;
+            width: 100%;
+            height: auto;
+            background-color: #fff;
+        }
+        .controls {
+            background-color: var(--color-bg-alt);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+        }
+        .controls h3 {
+            font-size: var(--font-size-base);
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 1px solid var(--color-border);
+        }
+        .control-group {
+            margin-bottom: var(--spacing-lg);
+        }
+        .control-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            margin-bottom: var(--spacing-sm);
+        }
+        .control-value {
+            font-family: var(--font-code);
+            color: var(--color-text-muted);
+        }
+        .btn-group {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-lg);
+        }
+        .btn-group .btn {
+            flex: 1;
+        }
+        .state-display {
+            margin-top: var(--spacing-lg);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--color-border);
+        }
+        .state-display h4 {
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--spacing-sm);
+        }
+        .state-values {
+            font-family: var(--font-code);
+            font-size: var(--font-size-sm);
+            line-height: 1.8;
+        }
+        .theory-section {
+            margin-top: var(--spacing-2xl);
+            padding-top: var(--spacing-xl);
+            border-top: 1px solid var(--color-border);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header / Navigation -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="../../index.html" class="site-title">Spoje-128</a>
+            <nav class="global-nav">
+                <ul class="nav-list">
+                    <li><a href="../../index.html" class="nav-link">Home</a></li>
+                    <li><a href="../../articles/index.html" class="nav-link">Articles</a></li>
+                    <li><a href="../index.html" class="nav-link active">Lab</a></li>
+                    <li><a href="../../portfolio.html" class="nav-link">Portfolio</a></li>
+                    <li><a href="https://github.com/Spoje-128" class="nav-link external" target="_blank" rel="noopener">GitHub</a></li>
+                </ul>
+                <button class="nav-toggle" aria-label="メニューを開く">
+                    <span class="hamburger"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content lab-page">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span class="breadcrumb-separator">&gt;</span>
+                <a href="../index.html">Lab</a>
+                <span class="breadcrumb-separator">&gt;</span>
+                <span>倒立振子</span>
+            </nav>
+
+            <!-- Simulation Header -->
+            <div class="simulation-header">
+                <h1 class="simulation-title">⚖️ 倒立振子シミュレーション</h1>
+                <p class="simulation-description">
+                    台車上の倒立振子をPID制御で安定化するデモです。
+                    制御ゲインをスライダーで調整し、システムの応答を観察できます。
+                </p>
+            </div>
+
+            <!-- Simulation Area -->
+            <div class="simulation-area">
+                <!-- Canvas -->
+                <div class="canvas-wrapper">
+                    <canvas id="pendulumCanvas" width="600" height="400"></canvas>
+                </div>
+
+                <!-- Controls -->
+                <div class="controls">
+                    <h3>Control Parameters</h3>
+                    
+                    <div class="control-group">
+                        <label class="control-label">
+                            <span>Kp (比例ゲイン)</span>
+                            <span class="control-value" id="kp-value">50</span>
+                        </label>
+                        <input type="range" id="kp-slider" min="0" max="200" value="50" step="1">
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">
+                            <span>Ki (積分ゲイン)</span>
+                            <span class="control-value" id="ki-value">0</span>
+                        </label>
+                        <input type="range" id="ki-slider" min="0" max="50" value="0" step="0.5">
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">
+                            <span>Kd (微分ゲイン)</span>
+                            <span class="control-value" id="kd-value">20</span>
+                        </label>
+                        <input type="range" id="kd-slider" min="0" max="100" value="20" step="1">
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">
+                            <span>初期角度 [deg]</span>
+                            <span class="control-value" id="theta0-value">10</span>
+                        </label>
+                        <input type="range" id="theta0-slider" min="-45" max="45" value="10" step="1">
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn" id="start-btn">Start</button>
+                        <button class="btn btn-secondary" id="reset-btn">Reset</button>
+                    </div>
+
+                    <!-- State Display -->
+                    <div class="state-display">
+                        <h4>System State</h4>
+                        <div class="state-values">
+                            <div>θ = <span id="state-theta">0.00</span>°</div>
+                            <div>ω = <span id="state-omega">0.00</span> rad/s</div>
+                            <div>x = <span id="state-x">0.00</span> m</div>
+                            <div>u = <span id="state-u">0.00</span> N</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Theory Section -->
+            <div class="theory-section">
+                <h2>運動方程式</h2>
+                <p>
+                    倒立振子の運動方程式は、ラグランジュ力学から導出できます。
+                    台車の位置を $x$、振子の角度を $\theta$（鉛直上向きを0とする）とすると：
+                </p>
+
+                $$
+                (M + m)\ddot{x} + ml\ddot{\theta}\cos\theta - ml\dot{\theta}^2\sin\theta = u
+                $$
+
+                $$
+                ml\ddot{x}\cos\theta + ml^2\ddot{\theta} - mgl\sin\theta = 0
+                $$
+
+                <p>
+                    ここで、$M$ は台車質量、$m$ は振子質量、$l$ は振子長さ、$g$ は重力加速度、$u$ は制御入力（台車への力）です。
+                </p>
+
+                <h3>線形化とPID制御</h3>
+                <p>
+                    $\theta \approx 0$ の近傍で線形化し、PID制御器を適用します：
+                </p>
+
+                $$
+                u = K_p \theta + K_i \int \theta \, dt + K_d \dot{\theta}
+                $$
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p class="copyright">&copy; 2025 Spoje-128. All rights reserved.</p>
+            <p class="footer-note">Built with HTML5, CSS3, and Vanilla JavaScript.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../js/common.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
