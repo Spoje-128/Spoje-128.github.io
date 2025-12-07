@@ -58,12 +58,12 @@
                 
                 <!-- Tag Filter -->
                 <div class="tag-filter">
-                    <span class="tag tag-active" data-tag="all">All</span>
-                    <span class="tag" data-tag="electronics">Electronics</span>
-                    <span class="tag" data-tag="physics">Physics</span>
-                    <span class="tag" data-tag="programming">Programming</span>
-                    <span class="tag" data-tag="math">Math</span>
-                    <span class="tag" data-tag="music">Music</span>
+                    <button class="tag-btn active" data-tag="all">All</button>
+                    <button class="tag-btn" data-tag="electronics">Electronics</button>
+                    <button class="tag-btn" data-tag="physics">Physics</button>
+                    <button class="tag-btn" data-tag="programming">Programming</button>
+                    <button class="tag-btn" data-tag="math">Math</button>
+                    <button class="tag-btn" data-tag="music">Music</button>
                 </div>
             </div>
         </section>
@@ -71,54 +71,59 @@
         <!-- Article List -->
         <section class="section section-alt">
             <div class="container">
-                <div class="article-list-flat">
-                    <!-- Sample: Op-Amp -->
+                <div class="articles-container">
+                    <!-- Sample Article 1 -->
                     <article class="article-card" data-tags="electronics">
                         <div class="article-card-content">
+                            <div class="article-card-tags">
+                                <span class="tag">Electronics</span>
+                            </div>
                             <h2 class="article-card-title">
                                 <a href="sample-opamp.html">サンプル記事：オペアンプの基礎</a>
                             </h2>
                             <p class="article-card-excerpt">
-                                反転増幅回路の解説と、PythonおよびC++による実装例。
+                                オペアンプの基本概念と反転増幅回路について解説します。
                             </p>
-                            <div class="article-card-meta">
-                                <time datetime="2025-12-06">2025.12.06</time>
-                                <span class="tag tag-sm">Electronics</span>
-                            </div>
+                            <time class="article-card-date" datetime="2025-12-06">2025.12.06</time>
                         </div>
                     </article>
 
-                    <!-- Sample: Lagrangian -->
+                    <!-- Sample Article 2 -->
                     <article class="article-card" data-tags="physics">
                         <div class="article-card-content">
+                            <div class="article-card-tags">
+                                <span class="tag">Physics</span>
+                            </div>
                             <h2 class="article-card-title">
                                 <a href="sample-lagrangian.html">サンプル記事：ラグランジュ力学入門</a>
                             </h2>
                             <p class="article-card-excerpt">
-                                解析力学の基礎。オイラー・ラグランジュ方程式と単振り子の例。
+                                解析力学の基礎であるラグランジュ形式について解説します。
                             </p>
-                            <div class="article-card-meta">
-                                <time datetime="2025-12-06">2025.12.06</time>
-                                <span class="tag tag-sm">Physics</span>
-                            </div>
+                            <time class="article-card-date" datetime="2025-12-06">2025.12.06</time>
                         </div>
                     </article>
 
-                    <!-- Sample: Rust -->
+                    <!-- Sample Article 3 -->
                     <article class="article-card" data-tags="programming">
                         <div class="article-card-content">
+                            <div class="article-card-tags">
+                                <span class="tag">Programming</span>
+                            </div>
                             <h2 class="article-card-title">
                                 <a href="sample-rust.html">サンプル記事：Rustで数値計算</a>
                             </h2>
                             <p class="article-card-excerpt">
-                                4次ルンゲ・クッタ法をRustで実装。減衰振動のシミュレーション。
+                                ルンゲ・クッタ法をRustで実装します。
                             </p>
-                            <div class="article-card-meta">
-                                <time datetime="2025-12-06">2025.12.06</time>
-                                <span class="tag tag-sm">Programming</span>
-                            </div>
+                            <time class="article-card-date" datetime="2025-12-06">2025.12.06</time>
                         </div>
                     </article>
+
+                    <!-- No articles message -->
+                    <div class="no-articles" style="display: none;">
+                        <p>該当する記事がありません。</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -134,5 +139,38 @@
 
     <!-- Scripts -->
     <script src="../js/common.js"></script>
+    <script>
+    // Tag filtering functionality
+    (function() {
+        const tagBtns = document.querySelectorAll('.tag-btn');
+        const articleCards = document.querySelectorAll('.article-card');
+        const noArticles = document.querySelector('.no-articles');
+        
+        tagBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Update active button
+                tagBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const tag = this.dataset.tag;
+                let visibleCount = 0;
+                
+                articleCards.forEach(card => {
+                    if (tag === 'all' || card.dataset.tags.includes(tag)) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Show/hide "no articles" message
+                if (noArticles) {
+                    noArticles.style.display = visibleCount === 0 ? 'block' : 'none';
+                }
+            });
+        });
+    })();
+    </script>
 </body>
 </html>

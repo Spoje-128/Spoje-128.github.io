@@ -243,6 +243,39 @@
     }
 
     // ============================================
+    // Tag Filter for Articles
+    // ============================================
+    function initTagFilter() {
+        const tagButtons = document.querySelectorAll('.tag-filter .tag');
+        const articles = document.querySelectorAll('.article-card[data-tags]');
+        
+        if (!tagButtons.length || !articles.length) return;
+        
+        tagButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                const selectedTag = this.getAttribute('data-tag');
+                
+                // Update active state
+                tagButtons.forEach(function(btn) {
+                    btn.classList.remove('tag-active');
+                });
+                this.classList.add('tag-active');
+                
+                // Filter articles
+                articles.forEach(function(article) {
+                    const articleTags = article.getAttribute('data-tags').split(' ');
+                    
+                    if (selectedTag === 'all' || articleTags.includes(selectedTag)) {
+                        article.classList.remove('hidden');
+                    } else {
+                        article.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    }
+
+    // ============================================
     // Initialize on DOM Ready
     // ============================================
     function init() {
@@ -253,6 +286,7 @@
         handleExternalLinks();
         wrapTables();
         initLazyLoading();
+        initTagFilter();
     }
 
     // Run when DOM is ready

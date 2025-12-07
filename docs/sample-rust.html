@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="サンプル記事 - Rustで数値計算">
+    <meta name="description" content="Rustで数値計算 - ルンゲ・クッタ法の実装">
     <title>サンプル記事：Rustで数値計算 | Spoje-128</title>
     
     <!-- Fonts -->
@@ -61,7 +61,7 @@
                     <h1 class="article-title">サンプル記事：Rustで数値計算</h1>
                     <p class="article-meta">
                         <time datetime="2025-12-06">2025.12.06</time>
-                        <span class="tag tag-sm">Programming</span>
+                        <span class="tag">Programming</span>
                     </p>
                 </header>
 
@@ -69,7 +69,7 @@
                 <div class="article-content">
                     <p>
                         Rustは高速で安全なシステムプログラミング言語です。
-                        この記事では、ルンゲ・クッタ法をRustで実装します。
+                        この記事では、常微分方程式の数値解法であるルンゲ・クッタ法をRustで実装します。
                     </p>
 
                     <h2>1. 問題設定</h2>
@@ -81,13 +81,27 @@
                     \frac{dy}{dt} = f(t, y), \quad y(t_0) = y_0
                     $$
 
+                    <p>
+                        例として、減衰振動の方程式を解きます：
+                    </p>
+
+                    $$
+                    \ddot{x} + 2\gamma\dot{x} + \omega_0^2 x = 0
+                    $$
+
                     <h2>2. 4次ルンゲ・クッタ法</h2>
                     <p>
                         RK4法の更新式は：
                     </p>
 
                     $$
-                    y_{n+1} = y_n + \frac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4)
+                    \begin{align}
+                    k_1 &amp;= h \cdot f(t_n, y_n) \\
+                    k_2 &amp;= h \cdot f(t_n + h/2, y_n + k_1/2) \\
+                    k_3 &amp;= h \cdot f(t_n + h/2, y_n + k_2/2) \\
+                    k_4 &amp;= h \cdot f(t_n + h, y_n + k_3) \\
+                    y_{n+1} &amp;= y_n + \frac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4)
+                    \end{align}
                     $$
 
                     <h2>3. Rust実装</h2>
@@ -95,36 +109,97 @@
                     <pre><code class="language-rust">/// 状態ベクトル
 #[derive(Clone, Copy)]
 struct State {
-    x: f64,
-    v: f64,
+    x: f64,      // 位置
+    v: f64,      // 速度
 }
 
 impl State {
     fn new(x: f64, v: f64) -&gt; Self {
         State { x, v }
     }
+    
+    fn scale(&amp;self, s: f64) -&gt; Self {
+        State { x: self.x * s, v: self.v * s }
+    }
+    
+    fn add(&amp;self, other: &amp;State) -&gt; Self {
+        State { x: self.x + other.x, v: self.v + other.v }
+    }
 }
 
-/// 4次ルンゲ・クッタ法による積分
-fn rk4_step(state: &amp;State, dt: f64) -&gt; State {
-    // 実装は省略
-    state.clone()
+/// 減衰振動子のパラメータ
+struct DampedOscillator {
+    gamma: f64,   // 減衰係数
+    omega0: f64,  // 固有角振動数
+}
+
+impl DampedOscillator {
+    /// 微分方程式の右辺 dy/dt = f(t, y)
+    fn derivative(&amp;self, _t: f64, state: &amp;State) -&gt; State {
+        State {
+            x: state.v,
+            v: -2.0 * self.gamma * state.v - self.omega0.powi(2) * state.x,
+        }
+    }
+}
+
+/// 4次ルンゲ・クッタ法による1ステップの積分
+fn rk4_step(
+    osc: &amp;DampedOscillator,
+    t: f64,
+    state: &amp;State,
+    dt: f64,
+) -&gt; State {
+    let k1 = osc.derivative(t, state);
+    let k2 = osc.derivative(t + dt/2.0, &amp;state.add(&amp;k1.scale(dt/2.0)));
+    let k3 = osc.derivative(t + dt/2.0, &amp;state.add(&amp;k2.scale(dt/2.0)));
+    let k4 = osc.derivative(t + dt, &amp;state.add(&amp;k3.scale(dt)));
+    
+    // y_{n+1} = y_n + (k1 + 2*k2 + 2*k3 + k4) * dt / 6
+    state.add(
+        &amp;k1.add(&amp;k2.scale(2.0))
+           .add(&amp;k3.scale(2.0))
+           .add(&amp;k4)
+           .scale(dt / 6.0)
+    )
 }
 
 fn main() {
-    let state = State::new(1.0, 0.0);
-    println!("x = {}, v = {}", state.x, state.v);
+    let osc = DampedOscillator {
+        gamma: 0.1,
+        omega0: 1.0,
+    };
+    
+    let mut state = State::new(1.0, 0.0);  // x(0) = 1, v(0) = 0
+    let dt = 0.01;
+    let t_max = 20.0;
+    
+    let mut t = 0.0;
+    while t &lt; t_max {
+        println!("{:.3}, {:.6}, {:.6}", t, state.x, state.v);
+        state = rk4_step(&amp;osc, t, &amp;state, dt);
+        t += dt;
+    }
 }</code></pre>
 
-                    <h2>4. まとめ</h2>
+                    <h2>4. 実行結果</h2>
+                    <p>
+                        上記のコードを実行すると、減衰振動の時間発展が出力されます。
+                        初期振幅 $x(0) = 1$ から始まり、減衰係数 $\gamma = 0.1$ に従って振幅が減衰していきます。
+                    </p>
+
+                    <h2>5. まとめ</h2>
                     <p>
                         Rustの特徴：
                     </p>
                     <ul>
-                        <li>ゼロコスト抽象化</li>
+                        <li>ゼロコスト抽象化により、高レベルな記述でもC/C++並みの速度</li>
                         <li>所有権システムによるメモリ安全性</li>
-                        <li>強力な型システム</li>
+                        <li>強力な型システムによるバグの早期発見</li>
                     </ul>
+                    <p>
+                        数値計算においても、Rustは優れた選択肢となります。
+                    </p>
                 </div>
             </div>
         </article>

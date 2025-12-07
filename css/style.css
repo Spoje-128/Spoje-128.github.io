@@ -5,18 +5,18 @@
 
 /* ----- CSS Variables ----- */
 :root {
-    /* Colors - 深緑基調 + シャーペングレー モノトーン */
+    /* Colors - Deep Green & Pencil Gray Monotone */
     --color-bg: #ffffff;
-    --color-bg-alt: #f5f5f5;
-    --color-text: #1a1a1a;           /* 黒に近い色で読みやすく */
+    --color-bg-alt: #f7f7f7;
+    --color-text: #1a1a1a;           /* 黒に近い - 読みやすさ優先 */
     --color-text-light: #4a4a4a;     /* シャーペングレー */
-    --color-text-muted: #6b6b6b;     /* シャーペングレー（薄め） */
-    --color-primary: #1e5631;        /* 深緑 - メインアクセント */
-    --color-primary-light: #2d7a47;  /* 深緑（明るめ） */
-    --color-secondary: #3d3d3d;      /* ダークグレー */
-    --color-accent: #1e5631;         /* 深緑 - リンク等 */
-    --color-border: #d4d4d4;         /* シャーペングレー（ボーダー） */
-    --color-border-dark: #a3a3a3;    /* シャーペングレー（濃いめボーダー） */
+    --color-text-muted: #6b6b6b;     /* シャーペングレー薄め */
+    --color-primary: #1e3a2f;        /* 深緑 - メインアクセント */
+    --color-primary-light: #2d5a47;  /* 深緑ライト */
+    --color-secondary: #3d7a5a;      /* 深緑セカンダリ */
+    --color-accent: #2d5a47;         /* 深緑 - リンク等 */
+    --color-border: #d4d4d4;         /* シャーペングレーボーダー */
+    --color-border-dark: #a3a3a3;    /* シャーペングレー濃いめ */
     
     /* Typography */
     --font-body: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -455,20 +455,6 @@ th {
 .article-meta {
     color: var(--color-text-muted);
     font-size: var(--font-size-sm);
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
-    flex-wrap: wrap;
-}
-
-.article-meta .tag {
-    display: inline-block;
-    background-color: var(--color-primary);
-    color: white;
-    font-size: var(--font-size-xs);
-    padding: 0.15rem 0.5rem;
-    border-radius: 3px;
-    font-weight: 500;
 }
 
 .article-content h2 {
@@ -905,7 +891,7 @@ input[type="number"] {
     margin-right: var(--spacing-sm);
 }
 
-/* ----- Tag Filter (Articles Page) ----- */
+/* ----- Article List (Flat Structure) ----- */
 .tag-filter {
     display: flex;
     flex-wrap: wrap;
@@ -913,31 +899,24 @@ input[type="number"] {
     margin-top: var(--spacing-lg);
 }
 
-.tag-btn {
-    padding: var(--spacing-sm) var(--spacing-md);
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius);
-    font-family: var(--font-body);
-    font-size: var(--font-size-sm);
-    color: var(--color-text-light);
+.tag-filter .tag {
     cursor: pointer;
     transition: all var(--transition-fast);
 }
 
-.tag-btn:hover {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
-}
-
-.tag-btn.active {
+.tag-filter .tag:hover {
     background-color: var(--color-primary);
+    color: var(--color-bg);
     border-color: var(--color-primary);
-    color: #ffffff;
 }
 
-/* ----- Article Cards (Flat Structure) ----- */
-.articles-container {
+.tag-filter .tag-active {
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+    border-color: var(--color-primary);
+}
+
+.article-list-flat {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-lg);
@@ -956,8 +935,8 @@ input[type="number"] {
     box-shadow: var(--shadow-sm);
 }
 
-.article-card-tags {
-    margin-bottom: var(--spacing-sm);
+.article-card.hidden {
+    display: none;
 }
 
 .article-card-title {
@@ -977,16 +956,19 @@ input[type="number"] {
 .article-card-excerpt {
     color: var(--color-text-light);
     font-size: var(--font-size-sm);
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.6;
 }
 
-.article-card-date {
-    color: var(--color-text-muted);
+.article-card-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
     font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
 }
 
-.no-articles {
-    text-align: center;
-    padding: var(--spacing-2xl);
-    color: var(--color-text-muted);
+.tag-sm {
+    font-size: 0.7rem;
+    padding: var(--spacing-xs) var(--spacing-sm);
 }

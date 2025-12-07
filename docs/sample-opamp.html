@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="サンプル記事 - オペアンプの基礎">
+    <meta name="description" content="サンプル記事テンプレート - 数式とコードブロックのデモ">
     <title>サンプル記事：オペアンプの基礎 | Spoje-128</title>
     
     <!-- Fonts -->
@@ -61,7 +61,7 @@
                     <h1 class="article-title">サンプル記事：オペアンプの基礎</h1>
                     <p class="article-meta">
                         <time datetime="2025-12-06">2025.12.06</time>
-                        <span class="tag tag-sm">Electronics</span>
+                        <span class="tag">Electronics</span>
                     </p>
                 </header>
 
@@ -95,7 +95,12 @@
 
                     <p>
                         ここで、$R_f$ はフィードバック抵抗、$R_{in}$ は入力抵抗です。
+                        ゲイン $A$ は次のように定義されます：
                     </p>
+
+                    $$
+                    A = -\frac{R_f}{R_{in}}
+                    $$
 
                     <h2>3. コード例</h2>
                     <p>
@@ -103,8 +108,18 @@
                     </p>
 
                     <pre><code class="language-python">def calculate_inverting_gain(r_feedback: float, r_input: float) -&gt; float:
-    """反転増幅回路のゲインを計算する"""
+    """
+    反転増幅回路のゲインを計算する
+    
+    Args:
+        r_feedback: フィードバック抵抗 [Ω]
+        r_input: 入力抵抗 [Ω]
+    
+    Returns:
+        ゲイン（負の値）
+    """
     return -r_feedback / r_input
+
 
 # 使用例
 R_f = 10e3  # 10 kΩ
@@ -113,10 +128,67 @@ R_in = 1e3  # 1 kΩ
 gain = calculate_inverting_gain(R_f, R_in)
 print(f"ゲイン: {gain:.1f}")  # ゲイン: -10.0</code></pre>
 
-                    <h2>4. まとめ</h2>
+                    <h3>3.1 C++での実装</h3>
+                    <p>
+                        同様の計算をC++で実装すると以下のようになります：
+                    </p>
+
+                    <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+
+class OpAmpCircuit {
+private:
+    double r_feedback;
+    double r_input;
+
+public:
+    OpAmpCircuit(double rf, double rin) 
+        : r_feedback(rf), r_input(rin) {}
+
+    double calculate_gain() const {
+        return -r_feedback / r_input;
+    }
+
+    double calculate_output(double v_in) const {
+        return calculate_gain() * v_in;
+    }
+};
+
+int main() {
+    OpAmpCircuit circuit(10e3, 1e3);  // Rf = 10kΩ, Rin = 1kΩ
+    
+    std::cout &lt;&lt; "Gain: " &lt;&lt; circuit.calculate_gain() &lt;&lt; std::endl;
+    std::cout &lt;&lt; "Vout (Vin=1V): " &lt;&lt; circuit.calculate_output(1.0) &lt;&lt; " V" &lt;&lt; std::endl;
+    
+    return 0;
+}</code></pre>
+
+                    <h2>4. 伝達関数</h2>
+                    <p>
+                        実際のオペアンプには有限の帯域幅があり、周波数特性を考慮する必要があります。
+                        単極モデルを仮定すると、開ループ伝達関数は：
+                    </p>
+
+                    $$
+                    A(s) = \frac{A_0}{1 + s/\omega_p}
+                    $$
+
+                    <p>
+                        ここで、$A_0$ はDCゲイン、$\omega_p$ は支配極の角周波数です。
+                        ゲイン帯域幅積（GBW）は $A_0 \omega_p$ で与えられます。
+                    </p>
+
+                    <h2>5. まとめ</h2>
                     <p>
                         この記事では、オペアンプの基礎的な概念と反転増幅回路について解説しました。
+                        数式とコードを用いて、理論と実装の両面から理解を深めることができます。
                     </p>
+
+                    <blockquote>
+                        <p>
+                            「理論なき実践は盲目であり、実践なき理論は空虚である。」— カント（意訳）
+                        </p>
+                    </blockquote>
                 </div>
             </div>
         </article>

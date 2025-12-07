@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="サンプル記事 - Rustで数値計算">
-    <title>サンプル記事：Rustで数値計算 | Spoje-128</title>
+    <meta name="description" content="ラグランジュ力学入門 - 解析力学の基礎">
+    <title>サンプル記事：ラグランジュ力学入門 | Spoje-128</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,10 +14,6 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/syntax.css">
-    
-    <!-- Highlight.js -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     
     <!-- MathJax -->
     <script src="../js/math_config.js"></script>
@@ -53,77 +49,109 @@
                     <span class="breadcrumb-separator">&gt;</span>
                     <a href="index.html">Articles</a>
                     <span class="breadcrumb-separator">&gt;</span>
-                    <span>Rustで数値計算</span>
+                    <span>ラグランジュ力学入門</span>
                 </nav>
 
                 <!-- Article Header -->
                 <header class="article-header">
-                    <h1 class="article-title">サンプル記事：Rustで数値計算</h1>
+                    <h1 class="article-title">サンプル記事：ラグランジュ力学入門</h1>
                     <p class="article-meta">
                         <time datetime="2025-12-06">2025.12.06</time>
-                        <span class="tag tag-sm">Programming</span>
+                        <span class="tag">Physics</span>
                     </p>
                 </header>
 
                 <!-- Article Content -->
                 <div class="article-content">
                     <p>
-                        Rustは高速で安全なシステムプログラミング言語です。
-                        この記事では、ルンゲ・クッタ法をRustで実装します。
+                        ラグランジュ力学は、ニュートン力学を一般化した解析力学の枠組みです。
+                        拘束条件を持つ系の運動を、より自然に記述できます。
                     </p>
 
-                    <h2>1. 問題設定</h2>
+                    <h2>1. ラグランジアン</h2>
                     <p>
-                        初期値問題を考えます：
+                        系のラグランジアン $L$ は、運動エネルギー $T$ とポテンシャルエネルギー $V$ の差として定義されます：
                     </p>
 
                     $$
-                    \frac{dy}{dt} = f(t, y), \quad y(t_0) = y_0
+                    L = T - V
                     $$
 
-                    <h2>2. 4次ルンゲ・クッタ法</h2>
                     <p>
-                        RK4法の更新式は：
+                        一般化座標 $q_i$ と一般化速度 $\dot{q}_i$ を用いると：
                     </p>
 
                     $$
-                    y_{n+1} = y_n + \frac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4)
+                    L = L(q_1, q_2, \ldots, q_n, \dot{q}_1, \dot{q}_2, \ldots, \dot{q}_n, t)
                     $$
 
-                    <h2>3. Rust実装</h2>
+                    <h2>2. オイラー・ラグランジュ方程式</h2>
+                    <p>
+                        運動方程式はオイラー・ラグランジュ方程式によって与えられます：
+                    </p>
 
-                    <pre><code class="language-rust">/// 状態ベクトル
-#[derive(Clone, Copy)]
-struct State {
-    x: f64,
-    v: f64,
-}
+                    $$
+                    \frac{d}{dt}\left(\frac{\partial L}{\partial \dot{q}_i}\right) - \frac{\partial L}{\partial q_i} = 0
+                    $$
 
-impl State {
-    fn new(x: f64, v: f64) -&gt; Self {
-        State { x, v }
-    }
-}
+                    <p>
+                        この方程式は、作用積分
+                    </p>
 
-/// 4次ルンゲ・クッタ法による積分
-fn rk4_step(state: &amp;State, dt: f64) -&gt; State {
-    // 実装は省略
-    state.clone()
-}
+                    $$
+                    S = \int_{t_1}^{t_2} L \, dt
+                    $$
 
-fn main() {
-    let state = State::new(1.0, 0.0);
-    println!("x = {}, v = {}", state.x, state.v);
-}</code></pre>
+                    <p>
+                        を停留させる経路を与えます（最小作用の原理）。
+                    </p>
+
+                    <h2>3. 例：単振り子</h2>
+                    <p>
+                        長さ $l$ の単振り子を考えます。一般化座標として角度 $\theta$ を選ぶと：
+                    </p>
+
+                    <ul>
+                        <li>運動エネルギー: $T = \frac{1}{2}ml^2\dot{\theta}^2$</li>
+                        <li>ポテンシャルエネルギー: $V = -mgl\cos\theta$</li>
+                    </ul>
+
+                    <p>
+                        ラグランジアンは：
+                    </p>
+
+                    $$
+                    L = \frac{1}{2}ml^2\dot{\theta}^2 + mgl\cos\theta
+                    $$
+
+                    <p>
+                        オイラー・ラグランジュ方程式を適用すると：
+                    </p>
+
+                    $$
+                    ml^2\ddot{\theta} + mgl\sin\theta = 0
+                    $$
+
+                    <p>
+                        つまり：
+                    </p>
+
+                    $$
+                    \ddot{\theta} + \frac{g}{l}\sin\theta = 0
+                    $$
+
+                    <p>
+                        これは単振り子の運動方程式です。
+                    </p>
 
                     <h2>4. まとめ</h2>
                     <p>
-                        Rustの特徴：
+                        ラグランジュ形式の利点：
                     </p>
                     <ul>
-                        <li>ゼロコスト抽象化</li>
-                        <li>所有権システムによるメモリ安全性</li>
-                        <li>強力な型システム</li>
+                        <li>座標系の選択に自由度がある</li>
+                        <li>拘束条件を自然に取り込める</li>
+                        <li>対称性と保存則の関係が明確（ネーターの定理）</li>
                     </ul>
                 </div>
             </div>
@@ -140,6 +168,5 @@ fn main() {
 
     <!-- Scripts -->
     <script src="../js/common.js"></script>
-    <script>hljs.highlightAll();</script>
 </body>
 </html>
