@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Spoje-128 が個人利用のために開発したツールのプライバシーポリシー">
+    <meta name="robots" content="noindex">
+    <title>プライバシーポリシー | Spoje-128</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="site-title">Spoje-128</a>
+            <nav class="global-nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="articles/index.html" class="nav-link">Articles</a></li>
+                    <li><a href="lab/index.html" class="nav-link">Lab</a></li>
+                    <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+                    <li><a href="https://github.com/Spoje-128" class="nav-link external" target="_blank" rel="noopener">GitHub</a></li>
+                </ul>
+                <button class="nav-toggle" aria-label="メニューを開く">
+                    <span class="hamburger"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="section">
+            <div class="container">
+                <h1>プライバシーポリシー</h1>
+                <p>最終更新日: 2026年9月8日</p>
+
+                <h2>1. 適用範囲</h2>
+                <p>本ポリシーは、Spoje-128（以下「開発者」）が個人的な用途のために開発・運用しているパーソナルアシスタントツール <strong>Hermes</strong>（以下「本ツール」）に適用されます。本ツールは一般公開されているサービスではなく、開発者本人が自身のアカウントに対してのみ使用します。</p>
+
+                <h2>2. 取得する情報</h2>
+                <p>本ツールは、利用者本人の同意に基づき Google API を通じて以下の情報にアクセスします。</p>
+                <ul>
+                    <li>Google カレンダーの予定（<code>calendar</code> スコープ）</li>
+                    <li>Gmail のメッセージの読み取りおよびラベル・既読状態の変更（<code>gmail.readonly</code> / <code>gmail.modify</code> スコープ）</li>
+                </ul>
+                <p>アクセスするのは、認証を行った本人のアカウントのデータに限られます。第三者のアカウントからデータを取得することはありません。</p>
+
+                <h2>3. 利用目的</h2>
+                <p>取得した情報は、予定およびメールの要約・整理・通知という、利用者本人に対する提示のみに使用します。それ以外の目的には使用しません。</p>
+
+                <h2>4. 保存場所と保存期間</h2>
+                <p>取得したデータおよび OAuth トークンは、開発者が管理する自宅内の私有サーバー（Raspberry Pi）のローカルストレージにのみ保存されます。外部のクラウドストレージやデータベースには保存しません。不要になった時点で削除します。</p>
+
+                <h2>5. 第三者への提供</h2>
+                <p>取得した情報を第三者に販売・貸与・提供することはありません。広告目的での利用、および利用者本人以外への開示は行いません。</p>
+                <p>要約の生成のために外部の大規模言語モデル API に本文の一部を送信する場合がありますが、これは利用者本人の要求を処理する目的に限られ、送信先での学習利用を許諾していない事業者を選択しています。</p>
+
+                <h2>6. Google ユーザーデータの取り扱い</h2>
+                <p>本ツールによる Google API から取得した情報の使用および他アプリへの転送は、<a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API サービスのユーザーデータに関するポリシー</a>（限定的な使用の要件を含む）に準拠します。</p>
+
+                <h2>7. アクセス権の取り消し</h2>
+                <p>利用者はいつでも <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">Google アカウントの権限設定</a>から本ツールのアクセス権を取り消すことができます。取り消し後、本ツールは新たなデータを取得しません。</p>
+
+                <h2>8. お問い合わせ</h2>
+                <p>本ポリシーに関するお問い合わせは、<a href="https://github.com/Spoje-128" target="_blank" rel="noopener">GitHub プロフィール</a>に記載の連絡先までご連絡ください。</p>
+
+                <h2>9. 改定</h2>
+                <p>本ポリシーは必要に応じて改定されます。改定した場合は本ページの最終更新日を更新します。</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p class="copyright">&copy; 2025 Spoje-128. All rights reserved.</p>
+            <p class="footer-note">Built with HTML5, CSS3, and Vanilla JavaScript.</p>
+        </div>
+    </footer>
+
+    <script src="js/common.js"></script>
+</body>
+</html>
